@@ -8,7 +8,8 @@ namespace HaloCard.Contracts.v1
 	{
 		public class Urls
 		{
-			public const string HaloApiBaseUrl = "https://halo.api.stdlib.com/mcc@0.1.0/stats/";
+			public const string BaseUrl = "https://halo.api.stdlib.com/mcc@0.1.0/";
+			public const string EndpointStats = "stats";
 		}
 	}
 }

@@ -35,7 +35,7 @@ namespace HaloCard.Service.v1.Implementations
 			}
 		}
 
-		public StatService(IRestService restService, string baseUrl = Constants.Urls.HaloApiBaseUrl)
+		public StatService(IRestService restService, string baseUrl = Constants.Urls.BaseUrl)
 		{
 			_restService = restService;
 			_baseUrl = baseUrl;
@@ -54,7 +54,7 @@ namespace HaloCard.Service.v1.Implementations
 
 				string jsonContent = JsonSerializer.Serialize(haloCardRequest);
 
-				HttpResponseMessage response = await _restService.MakePostAsync(httpClient, "", jsonContent);
+				HttpResponseMessage response = await _restService.MakePostAsync(httpClient, Constants.Urls.EndpointStats, jsonContent);
 
 				string responseString = await response.Content.ReadAsStringAsync();
 				haloCardResponse = JsonSerializer.Deserialize<HaloCardResponse>(responseString);
