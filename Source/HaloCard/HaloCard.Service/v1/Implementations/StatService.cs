@@ -1,16 +1,14 @@
-﻿using HaloCard.Contracts.v1.Interfaces;
+﻿using HaloCard.Contracts.v1;
+using HaloCard.Contracts.v1.Interfaces;
 using HaloCard.Contracts.v1.Models;
-using HaloCard.Contracts.v1;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace HaloCard.Service.v1.Implementations
 {
-	public class StatService : IStatService
+	public class StatService : IStatService, IDisposable
 	{
 		private IRestService _restService;
 		private string _baseUrl;
@@ -19,7 +17,7 @@ namespace HaloCard.Service.v1.Implementations
 		{
 			get
 			{
-				if(_httpClient == null)
+				if (_httpClient == null)
 				{
 					_httpClient = _restService.GetHttpClientAsync(_baseUrl).Result;
 					return _httpClient;
@@ -39,6 +37,11 @@ namespace HaloCard.Service.v1.Implementations
 		{
 			_restService = restService;
 			_baseUrl = baseUrl;
+		}
+
+		public void Dispose()
+		{
+			_httpClient.Dispose();
 		}
 
 		public async Task<HaloCardResponse> GetHaloCardForGamerTagAsync(string gamerTag)
@@ -66,7 +69,7 @@ namespace HaloCard.Service.v1.Implementations
 				Console.WriteLine(ex.Message);
 				throw;
 			}
-			
+
 		}
 	}
 }

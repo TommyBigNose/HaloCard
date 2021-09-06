@@ -1,10 +1,8 @@
 ﻿using HaloCard.Contracts.v1.Interfaces;
-using HaloCard.Service.v1.Implementations;
 using HaloCard.Contracts.v1.Models;
+using HaloCard.Service.v1.Implementations;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HaloCard.Tests.v1.Implementations
 {
@@ -28,7 +26,7 @@ namespace HaloCard.Tests.v1.Implementations
 		}
 
 		[TestCase("SageOfChaos")]
-		public void Test1(string gamerTag)
+		public void GetHaloCardForGamerTagAsync_GoldenFlow(string gamerTag)
 		{
 			// Arrange
 			// Act

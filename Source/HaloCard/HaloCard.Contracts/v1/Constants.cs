@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HaloCard.Contracts.v1
+﻿namespace HaloCard.Contracts.v1
 {
 	public class Constants
 	{
