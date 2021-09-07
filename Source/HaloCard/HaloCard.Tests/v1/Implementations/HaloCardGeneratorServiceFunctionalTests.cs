@@ -42,5 +42,19 @@ namespace HaloCard.Tests.v1.Implementations
 			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
 			Assert.IsTrue(result.GamerTag.Equals(gamerTag, StringComparison.OrdinalIgnoreCase));
 		}
+
+		[TestCase("-_FakeStuff_-")]
+		public void GetHaloCardFromStats_InvalidArgument(string gamerTag)
+		{
+			// Arrange
+			HaloCardResponse haloCardResponse = _statService.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Act
+			HaloCardModel result = _sut.GetHaloCardFromStats(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(result.CardLevel == CardLevel.NotRated);
+			Assert.IsTrue(string.IsNullOrWhiteSpace(result.GamerTag));
+		}
 	}
 }

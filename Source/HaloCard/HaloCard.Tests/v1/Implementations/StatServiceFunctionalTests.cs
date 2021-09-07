@@ -35,5 +35,16 @@ namespace HaloCard.Tests.v1.Implementations
 			// Assert
 			Assert.IsTrue(result.GamerTag.Equals(gamerTag, StringComparison.OrdinalIgnoreCase));
 		}
+
+		[TestCase("-_FakeStuff_-")]
+		public void GetHaloCardForGamerTagAsync_InvalidGamerTag(string gamerTag)
+		{
+			// Arrange
+			// Act
+			HaloCardResponse result = _sut.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(string.IsNullOrWhiteSpace(result.GamerTag));
+		}
 	}
 }

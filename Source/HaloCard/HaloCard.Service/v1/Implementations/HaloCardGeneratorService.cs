@@ -29,7 +29,7 @@ namespace HaloCard.Service.v1.Implementations
 			{
 				cardLevel = CardLevel.Silver;
 			}
-			else
+			else if (haloCardModel.WinRatio > 0.00f)
 			{
 				cardLevel = CardLevel.Bronze;
 			}
