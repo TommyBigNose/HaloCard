@@ -1,12 +1,14 @@
-﻿using HaloCard.Contracts.v1.Interfaces;
+﻿using HaloCard.Contracts.v1;
+using HaloCard.Contracts.v1.Interfaces;
 using HaloCard.Contracts.v1.Models;
 using HaloCard.Service.v1.Implementations;
 using NUnit.Framework;
 using System;
 
-namespace HaloCard.Tests.v1.Implementations
+namespace HaloCard.Tests.Functional.v1.Implementations
 {
 	[TestFixture]
+	[Category(Constants.Tests.Functional)]
 	public class HaloCardGeneratorServiceFunctionalTests
 	{
 		private IRestService _restService;
@@ -36,7 +38,7 @@ namespace HaloCard.Tests.v1.Implementations
 			HaloCardResponse haloCardResponse = _statService.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
 
 			// Act
-			HaloCardModel result = _sut.GetHaloCardFromStats(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
 
 			// Assert
 			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
@@ -50,7 +52,7 @@ namespace HaloCard.Tests.v1.Implementations
 			HaloCardResponse haloCardResponse = _statService.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
 
 			// Act
-			HaloCardModel result = _sut.GetHaloCardFromStats(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
 
 			// Assert
 			Assert.IsTrue(result.CardLevel == CardLevel.NotRated);

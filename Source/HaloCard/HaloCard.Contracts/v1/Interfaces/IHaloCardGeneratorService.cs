@@ -10,6 +10,6 @@ namespace HaloCard.Contracts.v1.Interfaces
 		/// </summary>
 		/// <param name="haloCardResponse"></param>
 		/// <returns></returns>
-		Task<HaloCardModel> GetHaloCardFromStats(HaloCardResponse haloCardResponse);
+		Task<HaloCardModel> GetHaloCardFromStatsAsync(HaloCardResponse haloCardResponse);
 	}
 }

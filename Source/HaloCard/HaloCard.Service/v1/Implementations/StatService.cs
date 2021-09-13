@@ -57,7 +57,7 @@ namespace HaloCard.Service.v1.Implementations
 
 				string jsonContent = JsonSerializer.Serialize(haloCardRequest);
 
-				HttpResponseMessage response = await _restService.MakePostAsync(httpClient, Constants.Urls.EndpointStats, jsonContent);
+				HttpResponseMessage response = await _restService.PostAsync(httpClient, Constants.Urls.EndpointStats, jsonContent);
 
 				string responseString = await response.Content.ReadAsStringAsync();
 				haloCardResponse = JsonSerializer.Deserialize<HaloCardResponse>(responseString);

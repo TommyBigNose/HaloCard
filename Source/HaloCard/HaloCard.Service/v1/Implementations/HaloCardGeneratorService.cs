@@ -6,7 +6,7 @@ namespace HaloCard.Service.v1.Implementations
 {
 	public class HaloCardGeneratorService : IHaloCardGeneratorService
 	{
-		public async Task<HaloCardModel> GetHaloCardFromStats(HaloCardResponse haloCardResponse)
+		public async Task<HaloCardModel> GetHaloCardFromStatsAsync(HaloCardResponse haloCardResponse)
 		{
 			HaloCardModel haloCardModel = new HaloCardModel(haloCardResponse);
 

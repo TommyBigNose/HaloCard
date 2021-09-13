@@ -1,22 +1,26 @@
-﻿using HaloCard.Contracts.v1.Interfaces;
+﻿using HaloCard.Contracts.v1;
+using HaloCard.Contracts.v1.Interfaces;
 using HaloCard.Contracts.v1.Models;
 using HaloCard.Service.v1.Implementations;
+using HaloCard.Tests.Shared;
+using Moq;
 using NUnit.Framework;
 using System;
 
-namespace HaloCard.Tests.v1.Implementations
+namespace HaloCard.Tests.Unit.v1.Implementations
 {
 	[TestFixture]
-	public class StatServiceFunctionalTests
+	[Category(Constants.Tests.Unit)]
+	public class StatServiceUnitTests
 	{
-		private IRestService _restService;
+		private Mock<IRestService> _mockRestService;
 		private IStatService _sut;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_restService = new RestService();
-			_sut = new StatService(_restService);
+			_mockRestService = SharedMocks.GetMockRestService(true);
+			_sut = new StatService(_mockRestService.Object);
 		}
 
 		[TearDown]

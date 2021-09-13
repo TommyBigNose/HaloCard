@@ -21,7 +21,7 @@ namespace HaloCard.Contracts.v1.Interfaces
 		/// <param name="httpClient"></param>
 		/// <param name="endpoint"></param>
 		/// <returns></returns>
-		Task<HttpResponseMessage> MakeGetAsync(HttpClient httpClient, string endpoint);
+		Task<HttpResponseMessage> GetAsync(HttpClient httpClient, string endpoint);
 
 		/// <summary>
 		/// Make a simple POST call and return the response
@@ -30,6 +30,6 @@ namespace HaloCard.Contracts.v1.Interfaces
 		/// <param name="endpoint"></param>
 		/// <param name="jsonContent"></param>
 		/// <returns></returns>
-		Task<HttpResponseMessage> MakePostAsync(HttpClient httpClient, string endpoint, string jsonContent);
+		Task<HttpResponseMessage> PostAsync(HttpClient httpClient, string endpoint, string jsonContent);
 	}
 }

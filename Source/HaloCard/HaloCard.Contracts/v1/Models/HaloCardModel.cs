@@ -2,6 +2,11 @@
 {
 	public class HaloCardModel
 	{
+		public HaloCardModel()
+		{
+
+		}
+
 		/// <summary>
 		/// Copies shared stats from the response model to the card model
 		/// </summary>
@@ -12,7 +17,6 @@
 			this.ClanTag = haloCardResponse.ClanTag;
 			this.Emblem = haloCardResponse.Emblem;
 			this.GamesPlayed = haloCardResponse.GamesPlayed;
-			this.Losses = haloCardResponse.Losses;
 			this.Wins = haloCardResponse.Wins;
 			this.Losses = haloCardResponse.Losses;
 			this.WinRatio = haloCardResponse.WinRatio;
