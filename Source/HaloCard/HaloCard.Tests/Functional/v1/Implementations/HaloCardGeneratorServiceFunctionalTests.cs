@@ -20,7 +20,7 @@ namespace HaloCard.Tests.Functional.v1.Implementations
 		{
 			_restService = new RestService();
 			_statService = new StatService(_restService);
-			_sut = new HaloCardGeneratorService();
+			_sut = new HaloCardGeneratorService(_statService);
 		}
 
 		[TearDown]
@@ -32,7 +32,31 @@ namespace HaloCard.Tests.Functional.v1.Implementations
 		}
 
 		[TestCase("SageOfChaos")]
-		public void GetHaloCardFromStats_GoldenFlow(string gamerTag)
+		public void GetHaloCardFromStatsWithGamerTag_GoldenFlow(string gamerTag)
+		{
+			// Arrange
+			// Act
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
+			Assert.IsTrue(result.GamerTag.Equals(gamerTag, StringComparison.OrdinalIgnoreCase));
+		}
+
+		[TestCase("-_FakeStuff_-")]
+		public void GetHaloCardFromStatsWithGamerTag_InvalidArgument(string gamerTag)
+		{
+			// Arrange
+			// Act
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(result.CardLevel == CardLevel.NotRated);
+			Assert.IsTrue(string.IsNullOrWhiteSpace(result.GamerTag));
+		}
+
+		[TestCase("SageOfChaos")]
+		public void GetHaloCardFromStatsWithHaloCardResponse_GoldenFlow(string gamerTag)
 		{
 			// Arrange
 			HaloCardResponse haloCardResponse = _statService.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
@@ -42,11 +66,11 @@ namespace HaloCard.Tests.Functional.v1.Implementations
 
 			// Assert
 			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
-			Assert.IsTrue(result.GamerTag.Equals(gamerTag, StringComparison.OrdinalIgnoreCase));
+			Assert.IsTrue(result.GamerTag.Equals(haloCardResponse.GamerTag, StringComparison.OrdinalIgnoreCase));
 		}
 
 		[TestCase("-_FakeStuff_-")]
-		public void GetHaloCardFromStats_InvalidArgument(string gamerTag)
+		public void GetHaloCardFromStatsWithHaloCardResponse_InvalidArgument(string gamerTag)
 		{
 			// Arrange
 			HaloCardResponse haloCardResponse = _statService.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();

@@ -19,13 +19,13 @@ namespace HaloCard.Tests.Unit.v1.Implementations
 		[SetUp]
 		public void SetUp()
 		{
-			_mockRestService = SharedMocks.GetMockRestService(true);
-			_sut = new StatService(_mockRestService.Object);
+			// Not much going on here
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
+			_mockRestService = null;
 			_sut = null;
 		}
 
@@ -33,6 +33,9 @@ namespace HaloCard.Tests.Unit.v1.Implementations
 		public void GetHaloCardForGamerTagAsync_GoldenFlow(string gamerTag)
 		{
 			// Arrange
+			_mockRestService = SharedMocks.GetMockRestService(true);
+			_sut = new StatService(_mockRestService.Object);
+
 			// Act
 			HaloCardResponse result = _sut.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
 
@@ -44,6 +47,9 @@ namespace HaloCard.Tests.Unit.v1.Implementations
 		public void GetHaloCardForGamerTagAsync_InvalidGamerTag(string gamerTag)
 		{
 			// Arrange
+			_mockRestService = SharedMocks.GetMockRestService(false);
+			_sut = new StatService(_mockRestService.Object);
+
 			// Act
 			HaloCardResponse result = _sut.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
 

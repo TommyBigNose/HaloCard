@@ -2,6 +2,7 @@
 using HaloCard.Contracts.v1.Models;
 using Moq;
 using System.Net.Http;
+using System.Text.Json;
 
 namespace HaloCard.Tests.Shared
 {
@@ -55,7 +56,15 @@ namespace HaloCard.Tests.Shared
 				httpResponseMessage = new HttpResponseMessage()
 				{
 					StatusCode = System.Net.HttpStatusCode.OK,
-					Content = new StringContent(string.Empty)
+					Content = new StringContent(JsonSerializer.Serialize<HaloCardResponse>(GetHaloCardResponse(returnValid)))
+				};
+			}
+			else
+			{
+				httpResponseMessage = new HttpResponseMessage()
+				{
+					StatusCode = System.Net.HttpStatusCode.OK,
+					Content = new StringContent(JsonSerializer.Serialize<HaloCardResponse>(GetHaloCardResponse(returnValid)))
 				};
 			}
 

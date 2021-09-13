@@ -13,34 +13,31 @@ namespace HaloCard.Tests.Unit.v1.Implementations
 	[Category(Constants.Tests.Unit)]
 	public class HaloCardGeneratorServiceUnitTests
 	{
-		private Mock<IRestService> _mockRestService;
 		private Mock<IStatService> _mockStatService;
 		private IHaloCardGeneratorService _sut;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_mockRestService = SharedMocks.GetMockRestService(true);
 			_mockStatService = SharedMocks.GetMockStatService(true);
-			_sut = new HaloCardGeneratorService();
 		}
 
 		[TearDown]
 		public void TearDown()
 		{
-			_mockRestService = null;
 			_mockStatService = null;
 			_sut = null;
 		}
 
 		[TestCase("SageOfChaos")]
-		public void GetHaloCardFromStats_GoldenFlow(string gamerTag)
+		public void GetHaloCardFromStatsWithGamerTag_GoldenFlow(string gamerTag)
 		{
 			// Arrange
-			HaloCardResponse haloCardResponse = _mockStatService.Object.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+			_mockStatService = SharedMocks.GetMockStatService(true);
+			_sut = new HaloCardGeneratorService(_mockStatService.Object);
 
 			// Act
-			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
 
 			// Assert
 			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
@@ -48,10 +45,41 @@ namespace HaloCard.Tests.Unit.v1.Implementations
 		}
 
 		[TestCase("-_FakeStuff_-")]
-		public void GetHaloCardFromStats_InvalidArgument(string gamerTag)
+		public void GetHaloCardFromStatsWithGamerTag_InvalidArgument(string gamerTag)
 		{
 			// Arrange
-			HaloCardResponse haloCardResponse = _mockStatService.Object.GetHaloCardForGamerTagAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+			_mockStatService = SharedMocks.GetMockStatService(false);
+			_sut = new HaloCardGeneratorService(_mockStatService.Object);
+
+			// Act
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(gamerTag).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(result.CardLevel == CardLevel.NotRated);
+			Assert.IsTrue(string.IsNullOrWhiteSpace(result.GamerTag));
+		}
+
+		[TestCase("SageOfChaos")]
+		public void GetHaloCardFromStatsWithHaloCardResponse_GoldenFlow(string gamerTag)
+		{
+			// Arrange
+			_sut = new HaloCardGeneratorService(_mockStatService.Object);
+			HaloCardResponse haloCardResponse = SharedMocks.GetHaloCardResponse(true);
+
+			// Act
+			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
+
+			// Assert
+			Assert.IsTrue(result.CardLevel != CardLevel.NotRated);
+			Assert.IsTrue(result.GamerTag.Equals(haloCardResponse.GamerTag, StringComparison.OrdinalIgnoreCase));
+		}
+
+		[TestCase("-_FakeStuff_-")]
+		public void GetHaloCardFromStatsWithHaloCardResponse_InvalidArgument(string gamerTag)
+		{
+			// Arrange
+			_sut = new HaloCardGeneratorService(_mockStatService.Object);
+			HaloCardResponse haloCardResponse = SharedMocks.GetHaloCardResponse(false);
 
 			// Act
 			HaloCardModel result = _sut.GetHaloCardFromStatsAsync(haloCardResponse).ConfigureAwait(true).GetAwaiter().GetResult();
