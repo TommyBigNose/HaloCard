@@ -1,0 +1,33 @@
+﻿@page "/search"
+@using HaloCard.Contracts.v1.Interfaces
+@using HaloCard.Contracts.v1.Models
+@inject IHaloCardGeneratorService haloCardService
+
+<h1>Search</h1>
+
+<table>
+    <tr>
+        <td>Enter GamerTag: </td>
+        <td>
+            <input type="text" @bind="gamerTag"/>
+        </td>
+        <td>
+            <button class="btn btn-primary" @onclick="SearchGamerTag">Search</button>
+        </td>
+    </tr>
+</table>
+
+<p>GamerTag: @cardModel.GamerTag</p>
+<p>ClanTag: @cardModel.ClanTag</p>
+<p>Wins: @cardModel.Wins</p>
+
+@code {
+    private string gamerTag = "";
+    private HaloCardModel cardModel = new HaloCardModel();
+
+    private async Task SearchGamerTag()
+    {
+        cardModel = await haloCardService.GetHaloCardFromStatsAsync(gamerTag);
+        
+    }
+}

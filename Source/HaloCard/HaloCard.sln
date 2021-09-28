@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaloCard.Contracts", "HaloCard.Contracts\HaloCard.Contracts.csproj", "{578633CF-8974-4494-9CBA-B7E2ABD17520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaloCard.Contracts", "HaloCard.Contracts\HaloCard.Contracts.csproj", "{578633CF-8974-4494-9CBA-B7E2ABD17520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaloCard.Service", "HaloCard.Service\HaloCard.Service.csproj", "{A2785C38-4A6E-447A-A34B-14374B97C7DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaloCard.Service", "HaloCard.Service\HaloCard.Service.csproj", "{A2785C38-4A6E-447A-A34B-14374B97C7DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaloCard.Tests", "HaloCard.Tests\HaloCard.Tests.csproj", "{6CC5CA05-F37A-4FF8-85FD-872B54DDC1F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HaloCard.Tests", "HaloCard.Tests\HaloCard.Tests.csproj", "{6CC5CA05-F37A-4FF8-85FD-872B54DDC1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HaloCard.Blazor", "HaloCard.Blazor\HaloCard.Blazor.csproj", "{91FE25E7-C54A-4E9C-8094-2368EA1E8614}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6CC5CA05-F37A-4FF8-85FD-872B54DDC1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CC5CA05-F37A-4FF8-85FD-872B54DDC1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CC5CA05-F37A-4FF8-85FD-872B54DDC1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FE25E7-C54A-4E9C-8094-2368EA1E8614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FE25E7-C54A-4E9C-8094-2368EA1E8614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FE25E7-C54A-4E9C-8094-2368EA1E8614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FE25E7-C54A-4E9C-8094-2368EA1E8614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
